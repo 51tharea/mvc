@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web;
 using OrionMvc.Web;
-using System.Text.RegularExpressions;
 
 namespace OrionMvc
 {
     public class Application
     {
-
         public Application()
         {
         }
@@ -18,7 +15,7 @@ namespace OrionMvc
             set;
         }
 
-        static public Application Instance
+        public static Application Instance
         {
             get;
             set;
@@ -30,7 +27,7 @@ namespace OrionMvc
             set;
         }
 
-        public IView View
+        public View View
         {
             get;
             set;
@@ -47,9 +44,8 @@ namespace OrionMvc
             return Instance;
         }
 
-        #region private void Initialize()
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public virtual void Initialize()
         {
@@ -57,8 +53,5 @@ namespace OrionMvc
             Router = new Router();
             View = new View();
         }
-        #endregion
-
-
     }
 }

@@ -1,30 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace OrionMvc.Web
 {
-    public class RouteMeta:Dictionary<string,object>,IRouteMeta
+    public class RouteMeta : Dictionary<string, object>, IRouteMeta
     {
-        public IRoute Route
-        {
-            get;
-            set;
-        }
+        public IRoute Route { get;
+            set; }
 
-        public IRouter Router
-        {
-            get;
-            set;
-        }
+        public IRouter Router { get;
+            set; }
 
         public string Controller
         {
-            get{
+            get
+            {
                 return (string)this["controller"];
             }
-            set{
+            set
+            {
                 this["controller"] = value;
             }
         }
@@ -45,7 +40,6 @@ namespace OrionMvc.Web
         {
             get
             {
-                
                 return (string)this["rule"];
             }
             set
@@ -53,7 +47,5 @@ namespace OrionMvc.Web
                 this["rule"] = value;
             }
         }
-
-      
     }
 }

@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using OrionMvc.Web;
 
 namespace MvcTest.Application.Home
 {
-    public class Home:Controller
+    public class Home : Controller
     {
-
         public void Index()
         {
-            this["content"] = "Test Home Controller";
-            
+
+            ViewBag.Content = "TestHome";
+            ViewBag["deneme"] = "dfgdfg";
+            this["Title"] = " Bu bir Title";
         }
     }
 }

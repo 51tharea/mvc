@@ -7,11 +7,13 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
-    <div>
-    
-
-    </div>
+    <form id="form1">
+        <div>
+            <%= ViewBag.Content %>
+            <%= ViewBag.deneme %>
+            <%= ViewBag.Title %>
+      sdfsfsdf
+        </div>
     </form>
 </body>
 </html>

@@ -8,7 +8,6 @@ namespace OrionMvc.Web
     {
         public void Dispose()
         {
-
         }
 
         public void Init(HttpApplication context)
@@ -22,41 +21,33 @@ namespace OrionMvc.Web
 
 
 
-        void BeginRequest(object sender, EventArgs e)
+        private void BeginRequest(object sender, EventArgs e)
         {
-            //We received a request, so we save the original URL here
-            HttpContext context = ((HttpApplication)sender).Context;
-            string path = context.Request.Url.PathAndQuery ?? "/";
-            
         }
 
-        void EndRequest(object sender, EventArgs e)
+        private void EndRequest(object sender, EventArgs e)
         {
-            //We processed the request
         }
 
-        void AuthorizeRequest(object sender, EventArgs e)
+        private void AuthorizeRequest(object sender, EventArgs e)
         {
-            //We change uri for invoking correct handler
-            HttpContext context = ((HttpApplication)sender).Context;
+            var context = ((HttpApplication)sender).Context;
 
             if (context.Request.RawUrl.Contains(".bspx"))
             {
-                string url = context.Request.RawUrl.Replace(".bspx", ".aspx");
+                var url = context.Request.RawUrl.Replace(".bspx", ".aspx");
                 context.RewritePath(url);
             }
         }
 
-        void PreRequestHandlerExecute(object sender, EventArgs e)
+        private void PreRequestHandlerExecute(object sender, EventArgs e)
         {
-            //We set back the original url on browser
-            HttpContext context = ((HttpApplication)sender).Context;
+            var context = ((HttpApplication)sender).Context;
 
             if (context.Items["originalUrl"] != null)
             {
                 context.RewritePath((string)context.Items["originalUrl"]);
             }
         }
-
     }
 }

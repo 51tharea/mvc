@@ -5,12 +5,15 @@ namespace OrionMvc.Web
 {
     public interface IController
     {
-
-        //string Execute(HttpContext context, RouteMeta routeMeta);
         void Execute(HttpContext context, RouteMeta routeData);
 
-        //void Render(string View);
-        void Render(HttpContext context,string View);
+        void Render(HttpContext context, string View);
+
+        //string Render(HttpContext context, string View);
+
+        void Execute(HttpContextBase context, RouteMeta routeData);
+
+        void Render(HttpContextBase context, string View);
 
         HttpContext Context
         {
@@ -18,11 +21,17 @@ namespace OrionMvc.Web
             set;
         }
 
-        IViewData ViewData
+        ViewData ViewData
         {
             get;
             set;
         }
+        new dynamic ViewBag
+        {
+            set;
+            get;
+        }
+        
         string Name
         {
             get;
