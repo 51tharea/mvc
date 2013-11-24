@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Reflection;
 using System.Linq;
+using System.Collections;
 
 namespace OrionMvc.Web
 {
@@ -16,8 +17,6 @@ namespace OrionMvc.Web
         public Controller()
         {
             ViewBag = new ViewData();
-            ViewData = ViewBag;
-            //ViewBag = new ViewData();
             _actions = GetActionsList();
             _actionLayouts = new Dictionary<string, string>();
 
@@ -29,11 +28,7 @@ namespace OrionMvc.Web
             set;
         }
 
-        public ViewData ViewData
-        {
-            get;
-            set;
-        }
+
 
         public new dynamic ViewBag
         {
@@ -52,35 +47,45 @@ namespace OrionMvc.Web
         {
             get
             {
-                return ViewData[key];
+                return ViewBag[key];
             }
             set
             {
-                ViewData[key] = value;
+                ViewBag[key] = value;
             }
         }
 
-        //public void Render(HttpContext context, string View)
-        //{
-        //    Application.Instance.View.Render(this, View);
-        //}
 
         public void Render(HttpContext context, string View_)
         {
 
             context.Response.ContentType = "text/html";
 
-            var h = Application.Instance.View.Render(context,this, View_);
-            //View.Render(context, this, View_);
+            var h = Application.Instance.View.Render(context, this, View_);
 
             context.Response.Write(h);
             context.Response.End();
         }
 
-        public void Render(HttpContextBase context, string View)
+        public object View(string ViewName)
         {
-            //Application.Instance.View.Render(this, View);
+            var h = Application.Instance.View.Render(this.Context, this, ViewName);
+            return h;
         }
+
+        //public View View(string ViewName,object Model)
+        //{
+
+        //}
+
+        //public View View(string ViewName,string MasterPage)
+        //{
+
+        //}
+
+
+
+
 
 
         public void Execute(HttpContext context, RouteMeta routeData)
@@ -95,31 +100,13 @@ namespace OrionMvc.Web
 
             var html = string.Empty;
 
-            foreach (KeyValuePair<string, object> listOfparams in ViewData)
+            foreach (DictionaryEntry listOfparams in ViewBag)
             {
                 html += "Params" + listOfparams.Key + "----" + "value" + listOfparams.Value;
             }
             Render(context, actionName);
         }
 
-        public void Execute(HttpContextBase context, RouteMeta routeData)
-        {
-            var actionName = routeData.Action;
-            var action = FindAction(actionName);
-
-            actionName = action.Name;
-
-            InvokeAction(action);
-            Render(context, actionName);
-
-            //var html = string.Empty;
-
-            //foreach (KeyValuePair<string, object> listOfparams in ViewData)
-            //{
-            //    html += "Params" + listOfparams.Key + "----" + "value" + listOfparams.Value;
-            //}
-
-        }
 
         public MethodInfo FindAction(string name)
         {

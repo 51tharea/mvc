@@ -2,13 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Web;
 
     public interface IView
     {
-        void  Render(IController controller, string path);
-
-        //string Render(IController controller, string path);
-
-        //IViewData ViewData { set; get; }
+        string Render(HttpContext context, IController controller, string path);
+        string GetPathView(IController controller, string path);
+        object PartialRender(HttpContext context, IController controller, string path);
     }
 }

@@ -57,14 +57,12 @@
     <Compile Include="Web\IRouter.cs" />
     <Compile Include="Web\ISession.cs" />
     <Compile Include="Web\IView.cs" />
-    <Compile Include="Web\IViewData.cs" />
     <Compile Include="Web\Route.cs" />
     <Compile Include="Web\RouteMeta.cs" />
     <Compile Include="Web\Router.cs" />
     <Compile Include="Web\View.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Web\ViewBag.cs" />
     <Compile Include="Web\ViewData.cs" />
     <Compile Include="Web\ViewParserFilter.cs" />
   </ItemGroup>

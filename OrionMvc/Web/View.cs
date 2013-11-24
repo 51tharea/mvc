@@ -7,47 +7,64 @@ using System.Web.UI;
 
 namespace OrionMvc.Web
 {
-    public class View : Page
+    public class View : Page, IView
     {
         private static dynamic viewBag;
 
-        public View(){}
+        public View() { }
 
-        internal string Render(HttpContext context, IController controller, string path)
+        public View(string viewname=null)
+        {
+
+
+        }
+
+        public string Render(HttpContext context, IController controller, string path)
         {
             viewBag = controller.ViewBag;
-            ViewData = controller.ViewData;
-            
+
             string _path = string.Format("~/View/{0}/{1}.aspx", controller.Name, path);
 
             var objContentPage = BuildManager.CreateInstanceFromVirtualPath(_path.ToString(), typeof(Page)) as View;
 
             StringWriter sw = new StringWriter();
-   
+
             objContentPage.AppRelativeVirtualPath = _path.ToString();
 
-            HttpContext.Current.Server.Execute(objContentPage, sw, false);
+            context.Server.Execute(objContentPage, sw, false);
 
             return sw.GetStringBuilder().ToString();
-            
+
+        }
+
+        public object PartialRender(HttpContext context, IController controller, string path)
+        {
+            viewBag = controller.ViewBag;
+
+            string _path = string.Format("~/View/{0}/{1}.aspx", controller.Name, path);
+
+            var objContentPage = BuildManager.CreateInstanceFromVirtualPath(_path.ToString(), typeof(Page)) as View;
+
+            StringWriter sw = new StringWriter();
+
+            objContentPage.AppRelativeVirtualPath = _path.ToString();
+
+            context.Server.Execute(objContentPage, sw, false);
+
+
+            sw.GetStringBuilder().ToString();
+
+             return viewBag;
         }
 
 
 
-
-        public static string GetPathView(IController controller, string path)
+        public string GetPathView(IController controller, string path)
         {
             var _path = string.Empty;
             return _path;
         }
 
-
-        public static ViewData ViewData
-        {
-            get;
-
-            set;
-        }
 
         public static dynamic ViewBag
         {

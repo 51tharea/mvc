@@ -8,7 +8,7 @@ using System.Web.UI;
 
 namespace OrionMvc.Web
 {
-    public class ViewData : DynamicObject, IDictionary, ICollection, IEnumerable//Dictionary<string, object>, IViewData
+    public class ViewData : DynamicObject, IDictionary, ICollection, IEnumerable
     {
         Dictionary<string, object> viewBag;
 
@@ -16,6 +16,12 @@ namespace OrionMvc.Web
         {
             viewBag = new Dictionary<string, object>();
         }
+
+        public void DynamicDictionary(Dictionary<string, object> dictionary)
+        {
+            this.viewBag = dictionary;
+        }
+
 
         public override bool TrySetMember(SetMemberBinder binder, object value)
         {
@@ -32,7 +38,7 @@ namespace OrionMvc.Web
                 result = viewBag[binder.Name];
                 return true;
             }
-           
+
             result = null;
             return false;
         }
@@ -44,14 +50,16 @@ namespace OrionMvc.Web
 
         public object this[string key]
         {
-            get {
+            get
+            {
                 try
                 {
                     return viewBag[key];
-                }catch(KeyNotFoundException ex)
+                }
+                catch (KeyNotFoundException ex)
                 {
                     object result = null;
-                    GetMember(this,key, out result);
+                    GetMember(this, key, out result);
                     throw;
                 }
             }
@@ -72,11 +80,11 @@ namespace OrionMvc.Web
             }
 
             result = null;
-            return false;        
+            return false;
         }
         protected bool SetMember(ViewData viewData, string name, object value)
         {
-           
+
 
             var miArray = this.GetType().GetMember(name, BindingFlags.Public | BindingFlags.SetProperty | BindingFlags.Instance);
             if (miArray != null && miArray.Length > 0)
@@ -90,20 +98,6 @@ namespace OrionMvc.Web
             }
             return false;
         }
-
-        #region StateBag Methods
-
-
-
-        #endregion
-
-        #region Implementation of IStateManager
-
-
-
-        #endregion
-
-        #region Implementation of IDictionary
 
         void IDictionary.Add(object key, object value)
         {
@@ -187,6 +181,6 @@ namespace OrionMvc.Web
             return ((IDictionary)viewBag).GetEnumerator();
         }
 
-        #endregion
+
     }
 }

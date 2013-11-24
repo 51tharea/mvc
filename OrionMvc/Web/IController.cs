@@ -9,29 +9,19 @@ namespace OrionMvc.Web
 
         void Render(HttpContext context, string View);
 
-        //string Render(HttpContext context, string View);
-
-        void Execute(HttpContextBase context, RouteMeta routeData);
-
-        void Render(HttpContextBase context, string View);
-
         HttpContext Context
         {
             get;
             set;
         }
 
-        ViewData ViewData
-        {
-            get;
-            set;
-        }
+
         new dynamic ViewBag
         {
             set;
             get;
         }
-        
+
         string Name
         {
             get;

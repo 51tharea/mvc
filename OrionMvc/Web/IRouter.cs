@@ -9,7 +9,7 @@ namespace OrionMvc.Web
         void Connect(string path, object _default);
         void Connect(string path, object _default, object rule);
         void Dispatch(HttpContext context);
-        void Dispatch(HttpContextBase wrapper);
+
         void Match(string url);
 
         RouteMeta Meta
@@ -18,6 +18,6 @@ namespace OrionMvc.Web
             get;
         }
 
-        
+
     }
 }

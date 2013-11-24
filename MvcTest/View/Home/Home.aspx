@@ -1,16 +1,19 @@
 ﻿<%@ Page Language="C#" Inherits="OrionMvc.Web.View" %>
 
-<!DOCTYPE html>
+<p>Home içerik Test</p>
+<p>
+    <%   var html = string.Empty;
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1">
-        <div>
-            fdgdfgdfgdfgdfgdf
-        </div>
-    </form>
-</body>
-</html>
+         foreach (DictionaryEntry listOfparams in ViewBag)
+         {
+             if (listOfparams.Value is ViewData)
+             {
+               
+             }
+             html += "Params" + listOfparams.Key + "----" + "value" + listOfparams.Value;
+         }
+      
+    %>
+    <%=html %>
+</p>
+

@@ -49,19 +49,6 @@ namespace OrionMvc.Web
             controller.Execute(context, routeMeta);
         }
 
-        public void Dispatch(HttpContextBase context)
-        {
-            var App = Application.Instance;
-            var Path = context.Request.Path;
-            App.Router.Match(Path.TrimEnd('/'));
-            var routeMeta = App.Router.Meta;
-            var _context = routeMeta.Route;
-            var actionResult = (string)null;
-            var controller = App.ControllerFactory.CreateController(context, routeMeta);
-            controller.Execute(context, routeMeta);
-        }
-
-
 
         public void Connect(string path, object _default)
         {

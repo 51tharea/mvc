@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrionMvc.Web;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,13 +10,18 @@ namespace MvcTest
         protected void Application_Start(object sender, EventArgs e)
         {
             var App = OrionMvc.Application.GetInstance();
+            AppInstance(App.Router);
 
-            App.Router.Connect(string.Empty, new
+           
+            
+        }
+        private void AppInstance(IRouter router)
+        {
+            router.Connect(string.Empty, new
             {
                 controller = "Home",
                 action = "Index"
             });
-            ;
         }
     }
 }

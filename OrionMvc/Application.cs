@@ -27,7 +27,7 @@ namespace OrionMvc
             set;
         }
 
-        public View View
+        public IView View
         {
             get;
             set;
@@ -44,9 +44,7 @@ namespace OrionMvc
             return Instance;
         }
 
-        /// <summary>
-        ///
-        /// </summary>
+      
         public virtual void Initialize()
         {
             ControllerFactory = new ControllerFactory();
